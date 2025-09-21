@@ -7,9 +7,11 @@ function TrackingBox(props: ThreeElements['mesh']) {
     const meshRef = useRef<THREE.Mesh>(null!)
     const [hovered, setHover] = useState(false)
     const [active, setActive] = useState(false)
+    const [position, setPosition] = useState(new THREE.Vector3(1, 1, 1))
     useFrame((state, delta) => {
+
         if (hovered) {
-            meshRef.current.rotation.x = -state.pointer.y * 1.6
+            meshRef.current.rotation.x = -state.pointer.y * 1.6 
             meshRef.current.rotation.y = state.pointer.x * 2.9
         } else {
             //set it back to original state/orientation once the mouse is no longer hovering over the object
@@ -20,7 +22,24 @@ function TrackingBox(props: ThreeElements['mesh']) {
 
         if (active) {
             //if we're trying to truly make it like the balatro card
-            meshRef.current.translateY(delta * 2);
+            //meshRef.current.translateY(delta * 1.5)
+            
+            //grab the current position, save it, 
+            // then move it up until its a certain amount higher then starting position
+            //I think that should work
+            if (meshRef.current.position.y < 0.2) {
+                meshRef.current.rotation.x = 0
+                meshRef.current.rotation.y = 0
+
+                meshRef.current.position.y += 0.1
+            }
+        } else {
+            if (meshRef.current.position.y > 0) {
+                meshRef.current.rotation.x = 0
+                meshRef.current.rotation.y = 0
+
+                meshRef.current.position.y -= 0.1
+            }
         }
     })
 
@@ -28,12 +47,12 @@ function TrackingBox(props: ThreeElements['mesh']) {
         <mesh
         {...props}
         ref={meshRef}
-        scale={active ? 1.5 : 1}
+        scale={1} //active ? 1.5 : 1
         onClick={() => setActive(!active)}
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}>
             <boxGeometry args={[1,1,1]} />
-            <meshStandardMaterial color={hovered ? 'hotpink' : '#2f74c0'} />
+            <meshStandardMaterial color={active ? '#34737b' : '#2a6645'} /> {/*hovered ? 'hotpink' : '#2f74c0'*/}
         </mesh>
 
     )
