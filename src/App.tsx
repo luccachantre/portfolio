@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 
 import Box from './components/Box'
+import TrackingBox from './components/TrackingBox'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
       <Box position={[1.2, 1, 0]} />
       <Box position={[-1.2, 1, 0]} />
+      <TrackingBox position={[0, 0, 0]} />
     </Canvas>
   )
 }
