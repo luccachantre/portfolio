@@ -7,7 +7,12 @@ function TrackingBox(props: ThreeElements['mesh']) {
     const meshRef = useRef<THREE.Mesh>(null!)
     const [hovered, setHover] = useState(false)
     const [active, setActive] = useState(false)
-    const [position, setPosition] = useState(new THREE.Vector3(1, 1, 1))
+    //const [position, setPosition] = useState(new THREE.Vector3(1, 1, 1))
+
+    //TO DO:
+    //implement a click and drag feature for the cubes, shouldnt be too difficult
+
+
     useFrame((state, delta) => {
 
         if (hovered) {
@@ -31,14 +36,14 @@ function TrackingBox(props: ThreeElements['mesh']) {
                 meshRef.current.rotation.x = 0
                 meshRef.current.rotation.y = 0
 
-                meshRef.current.position.y += 0.1
+                meshRef.current.position.y += 0.07
             }
         } else {
             if (meshRef.current.position.y > 0) {
                 meshRef.current.rotation.x = 0
                 meshRef.current.rotation.y = 0
 
-                meshRef.current.position.y -= 0.1
+                meshRef.current.position.y -= 0.07
             }
         }
     })
