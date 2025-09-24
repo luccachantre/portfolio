@@ -4,6 +4,9 @@ import { useFrame } from '@react-three/fiber'
 import type { ThreeElements } from '@react-three/fiber'
 
 function TrackingBox(props: ThreeElements['mesh']) {
+    //we put props as a parameter so we can specify varying props in the component creation in app.js
+    //so we can initialize cubes with different attributes instead of hardcoding them all in here
+    //props allows us to specify position and more in app.js, not just in here
     const meshRef = useRef<THREE.Mesh>(null!)
     const [hovered, setHover] = useState(false)
     const [active, setActive] = useState(false)
@@ -36,21 +39,21 @@ function TrackingBox(props: ThreeElements['mesh']) {
                 meshRef.current.rotation.x = 0
                 meshRef.current.rotation.y = 0
 
-                meshRef.current.position.y += 0.07
+                meshRef.current.position.y += 0.05
             }
         } else {
             if (meshRef.current.position.y > 0) {
                 meshRef.current.rotation.x = 0
                 meshRef.current.rotation.y = 0
 
-                meshRef.current.position.y -= 0.07
+                meshRef.current.position.y -= 0.05
             }
         }
     })
 
     return (
         <mesh
-        {...props}
+        {...props} //this is simply passing down all the properties we specified in app.js
         ref={meshRef}
         scale={1} //active ? 1.5 : 1
         onClick={() => setActive(!active)}
