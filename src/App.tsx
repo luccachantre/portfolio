@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import Box from './components/Box'
 import TrackingBox from './components/TrackingBox'
 import D3Text from './components/3DText'
+import CameraBox from './components/CameraBox'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <TrackingBox position={[1.5, 0, 0]} />
       <TrackingBox position={[0, 0, 0]} />
       <TrackingBox position={[-1.5, 0, 0]} />
+      <CameraBox position={[0, 2, -2]} />
       <D3Text />
     </Canvas>
   )
