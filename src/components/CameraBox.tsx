@@ -19,7 +19,8 @@ function CameraBox(props: ThreeElements['mesh']) {
             // then move it up until its a certain amount higher then starting position
             //I think that should work
             if (camera.position.x < 2) {
-                camera.position.x += 0.001
+                camera.position.x += 0.001 
+                //notice how lookAt does not stay on origin, we need to update lookAt every frame then
             }
         } else {
             if (camera.position.x > 0) {
