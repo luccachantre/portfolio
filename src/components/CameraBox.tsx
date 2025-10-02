@@ -11,7 +11,9 @@ function CameraBox(props: ThreeElements['mesh']) {
     const { camera } = useThree()
 
     useFrame((state, delta) => {
+        const elapsed = performance.now() * 0.001;
         if (active) {
+
             //if we're trying to truly make it like the balatro card
             //meshRef.current.translateY(delta * 1.5)
             
@@ -19,7 +21,9 @@ function CameraBox(props: ThreeElements['mesh']) {
             // then move it up until its a certain amount higher then starting position
             //I think that should work
             if (camera.position.x < 2) {
-                camera.position.x += 0.001 
+                camera.position.x += Math.sin(elapsed) * 5
+                camera.position.z += Math.cos(elapsed) * 5
+                camera.lookAt(0, 0, 0)
                 //notice how lookAt does not stay on origin, we need to update lookAt every frame then
             }
         } else {
