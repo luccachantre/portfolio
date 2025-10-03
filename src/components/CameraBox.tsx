@@ -7,29 +7,37 @@ function CameraBox(props: ThreeElements['mesh']) {
     const meshRef = useRef<THREE.Mesh>(null!)
     const [hovered, setHover] = useState(false)
     const [active, setActive] = useState(false)
+    const [startTime, setStartTime] = useState(performance.now())
 
     const { camera } = useThree()
 
     useFrame((state, delta) => {
-        const elapsed = performance.now() * 0.001;
+        //const elapsed = performance.now() * 0.001;
         if (active) {
+            const elapsed = (performance.now() - startTime) * 0.001;
 
-            //if we're trying to truly make it like the balatro card
-            //meshRef.current.translateY(delta * 1.5)
-            
-            //grab the current position, save it, 
-            // then move it up until its a certain amount higher then starting position
-            //I think that should work
-            if (camera.position.x < 2) {
-                camera.position.x += Math.sin(elapsed) * 5
-                camera.position.z += Math.cos(elapsed) * 5
+            if (elapsed < 3) { //my solution to animate over a certain period of time, not sure about position though
+                const speed = 1
+
+                camera.position.x = Math.sin(elapsed * speed) * 1 
+                camera.position.z = Math.cos(elapsed * speed) * 5
+                if (elapsed < 1.50) {
+                    camera.position.y = -Math.sin(elapsed * speed)
+                } else {
+                    camera.position.y = -Math.sin(elapsed * speed)
+                }
+                //the * 1 and * 5 constants determine how far or close to the origin the camera will be
                 camera.lookAt(0, 0, 0)
-                //notice how lookAt does not stay on origin, we need to update lookAt every frame then
-            }
+            } 
+            
         } else {
-            if (camera.position.x > 0) {
-                camera.position.x -= 0.001
-            }
+            // const elapsed = (performance.now() - startTime) * 0.001;
+
+            camera.position.x = 0
+            camera.position.y = 0
+            camera.position.z = 5
+            camera.lookAt(0, 0, 0)
+            
         }
     })
 
@@ -38,7 +46,10 @@ function CameraBox(props: ThreeElements['mesh']) {
         {...props}
         ref={meshRef}
         scale={1}
-        onClick={() => setActive(!active)}
+        onClick={() => {
+            setActive(!active)
+            setStartTime(performance.now())
+        }}
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}>
             <boxGeometry args={[1,1,1]} />

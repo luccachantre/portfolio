@@ -8,7 +8,7 @@ import CameraBox from './components/CameraBox'
 function App() {
 
   return (
-    <Canvas>
+    <Canvas camera={{position: [0, 0, 5]}} >
       <ambientLight intensity={Math.PI / 2} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
       {/*<pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />*/}
