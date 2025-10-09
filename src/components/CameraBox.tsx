@@ -15,17 +15,29 @@ function CameraBox(props: ThreeElements['mesh']) {
         //const elapsed = performance.now() * 0.001;
         if (active) {
             const elapsed = (performance.now() - startTime) * 0.001;
+            const duration = 3
 
-            if (elapsed < 3) { //my solution to animate over a certain period of time, not sure about position though
+            if (elapsed < duration) { //my solution to animate over a certain period of time, not sure about position though
                 const speed = 1
 
-                camera.position.x = Math.sin(elapsed * speed) * 1 
-                camera.position.z = Math.cos(elapsed * speed) * 5
-                if (elapsed < 1.50) {
-                    camera.position.y = -Math.sin(elapsed * speed)
-                } else {
-                    camera.position.y = -Math.sin(elapsed * speed)
-                }
+                let xAmount = (meshRef.current.position.x + 5) - camera.position.x
+                let zAmount = (meshRef.current.position.z - 5) - camera.position.z
+                let yAmount = (meshRef.current.position.y + 5) - camera.position.y
+
+                camera.position.x += xAmount / 200
+                camera.position.z += zAmount / 200
+                camera.position.y += yAmount / 200
+
+                //ok so I accidentally discovered ease in/ease out or camera.position.lerp()
+                
+
+                // camera.position.x = Math.sin(elapsed * speed) * 1 
+                // camera.position.z = Math.cos(elapsed * speed) * 1 
+                // if (elapsed < 1.50) {
+                //     camera.position.y = -Math.sin(elapsed * speed)
+                // } else {
+                //     camera.position.y = -Math.sin(elapsed * speed)
+                // }
                 //the * 1 and * 5 constants determine how far or close to the origin the camera will be
                 camera.lookAt(0, 0, 0)
             } 
