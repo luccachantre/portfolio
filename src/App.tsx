@@ -4,6 +4,7 @@ import Box from './components/Box'
 import TrackingBox from './components/TrackingBox'
 import D3Text from './components/3DText'
 import CameraBox from './components/CameraBox'
+import CurveCamera from './components/curveCamera'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <TrackingBox position={[-1.5, 0, 0]} />
       <CameraBox position={[5, 2, -2]} />
       <D3Text />
+      <CurveCamera />
     </Canvas>
   )
 }
