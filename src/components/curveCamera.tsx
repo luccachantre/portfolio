@@ -18,15 +18,22 @@ const curveObject = new THREE.Line(geometry, material);
 
 function CurveCamera(props: ThreeElements['mesh']) {
     const meshRef = useRef<THREE.Mesh>(null!)
-        const [hovered, setHover] = useState(false)
-        const [active, setActive] = useState(false)
+    const [hovered, setHover] = useState(false)
+    const [active, setActive] = useState(false)
 
-        useFrame((state, delta) => (
-            //something.getPointAt
-            //meshRef.current.position.copy()
+    useFrame((state, delta) => {
+        //delta is not elapsed time, it's how much time has passed between frames I think
         
-        
-        ))
+        //something.getPointAt
+        //meshRef.current.position.copy()
+
+        const t = state.clock.getElapsedTime()
+
+        meshRef.current.position.copy(curve.getPointAt(t / 6))
+        //meshRef.current.position.x += 0.01
+        //meshRef.current.position.copy() = curve.getPointAt(delta)
+    
+    })
 
 
     return (
