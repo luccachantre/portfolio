@@ -4,11 +4,11 @@ import { useFrame, useThree } from '@react-three/fiber'
 import type { ThreeElements } from '@react-three/fiber'
 
 const curve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3( 0, 0, 3 ),
-	new THREE.Vector3( -2, 0, 0 ),
-	new THREE.Vector3( 0, 0, -3 ),
-	new THREE.Vector3( 2, 0, 0 ),
-	new THREE.Vector3( 0, 2, 1 )
+    new THREE.Vector3( 0, 0, 2 ),
+	new THREE.Vector3( -5, 0, 0 ),
+	new THREE.Vector3( 0, 0, -5 ),
+	new THREE.Vector3( 5, 0, 0 ),
+	new THREE.Vector3( 0, 2, 0.5 )
 ], true)
 
 const points = curve.getPoints(100)
@@ -21,17 +21,23 @@ function CurveCamera(props: ThreeElements['mesh']) {
     const [hovered, setHover] = useState(false)
     const [active, setActive] = useState(false)
 
+    const { camera } = useThree()
+
     useFrame((state, delta) => {
         //delta is not elapsed time, it's how much time has passed between frames I think
         
         //something.getPointAt
         //meshRef.current.position.copy()
 
-        const t = state.clock.getElapsedTime()
+        const t = (state.clock.getElapsedTime() / 1 % 6)  / 6 //divide by number of points + 1 for some reason?
+        //idk the youtube video said its standard, and it works so yeah idk
 
-        meshRef.current.position.copy(curve.getPointAt(t / 6))
-        //meshRef.current.position.x += 0.01
-        //meshRef.current.position.copy() = curve.getPointAt(delta)
+        meshRef.current.position.copy(curve.getPointAt(t))
+
+
+        // camera.position.copy(curve.getPointAt(t))
+        // camera.up.set(0, 1, 0)
+        // camera.lookAt(0, 0, 0)
     
     })
 
@@ -41,7 +47,8 @@ function CurveCamera(props: ThreeElements['mesh']) {
             <primitive object={curveObject}/>
             <mesh
             // {...props}
-            ref={meshRef}>
+            ref={meshRef}
+            scale = {0.5}>
                 <boxGeometry args={[1,1,1]} />
                 <meshStandardMaterial color={hovered ? 'hotpink' : '#2f74c0'} />
             </mesh>
