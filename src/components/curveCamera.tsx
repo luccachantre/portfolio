@@ -13,7 +13,7 @@ const curve = new THREE.CatmullRomCurve3([
 
 const points = curve.getPoints(100)
 const geometry = new THREE.BufferGeometry().setFromPoints(points)
-const material = new THREE.LineBasicMaterial({color: 0xff0000})
+const material = new THREE.LineBasicMaterial({color: 0xc96ce6})
 const curveObject = new THREE.Line(geometry, material);
 
 function CurveCamera(props: ThreeElements['mesh']) {
@@ -32,12 +32,16 @@ function CurveCamera(props: ThreeElements['mesh']) {
         const t = (state.clock.getElapsedTime() / 1 % 6)  / 6 //divide by number of points + 1 for some reason?
         //idk the youtube video said its standard, and it works so yeah idk
 
-        meshRef.current.position.copy(curve.getPointAt(t))
+        const position = curve.getPointAt(t)
+        const tangent = curve.getTangentAt(t).normalize()
+
+        meshRef.current.position.copy(position)
+        meshRef.current.lookAt(position.clone().add(tangent))
 
 
-        // camera.position.copy(curve.getPointAt(t))
+        // camera.position.copy(position)
         // camera.up.set(0, 1, 0)
-        // camera.lookAt(0, 0, 0)
+        // camera.lookAt(position.clone().add(tangent))
     
     })
 

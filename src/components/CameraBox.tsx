@@ -45,8 +45,9 @@ function CameraBox(props: ThreeElements['mesh']) {
         } else {
             // const elapsed = (performance.now() - startTime) * 0.001;
 
+            //THIS IS OVERRIDING OUR CAMERA POSITION DECLARATION IN App.tsx
             camera.position.x = 0
-            camera.position.y = 0
+            camera.position.y = 3
             camera.position.z = 5
             camera.lookAt(0, 0, 0)
             
