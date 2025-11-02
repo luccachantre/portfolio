@@ -19,7 +19,7 @@ function App() {
       <TrackingBox position={[1.5, 0, 0]} />
       <TrackingBox position={[0, 0, 0]} />
       <TrackingBox position={[-1.5, 0, 0]} />
-      {/* <CameraBox position={[5, 2, -2]} /> */}
+      <CameraBox position={[5, 2, -2]} />
       <Scene />
       <D3Text />
       <CurveCamera />
