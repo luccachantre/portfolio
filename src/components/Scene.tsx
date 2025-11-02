@@ -1,12 +1,19 @@
 import * as THREE from 'three'
 import { useRef, useState, useEffect } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useLoader } from '@react-three/fiber'
 import type { ThreeElements } from '@react-three/fiber'
-import { Plane } from '@react-three/drei'
+import { Plane, useTexture } from '@react-three/drei'
 
 function Scene(props: ThreeElements['mesh']) { 
     const meshRef = useRef<THREE.Mesh>(null!)
 
+    const planeProps = useTexture({
+        map: './grassFiles/Grass005_1K-JPG_Color.jpg',
+        displacementMap: './grassFiles/Grass005_1K-JPG_Displacement.jpg',
+        normalMap: './grassFiles/Grass005_1K-JPG_NormalGL.jpg',
+        roughnessMap: './grassFiles/Grass005_1K-JPG_Roughness.jpg',
+        aoMap: './grassFiles/Grass005_1K-JPG_AmbientOcclusion.jpg'
+    })
     
 
     useEffect(() => {
@@ -26,6 +33,10 @@ function Scene(props: ThreeElements['mesh']) {
         position={[0, -2, 0]}
         // color={'blue'} //not working/not the right way to do it, fix next time (and do texture loading and mapping)
         ref={meshRef}>
+
+        <meshStandardMaterial color={'#5c4bb8'} /> 
+        {/* //this is how you apply a regular color  */}
+        <meshStandardMaterial {...planeProps} displacementScale={0.2}/>
         </Plane>
 
     )
