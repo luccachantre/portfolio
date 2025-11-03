@@ -23,6 +23,8 @@ function CurveCamera(props: ThreeElements['mesh']) {
 
     const { camera } = useThree()
 
+    let x = 0;
+
     useFrame((state, delta) => {
         //delta is not elapsed time, it's how much time has passed between frames I think
         
@@ -40,8 +42,9 @@ function CurveCamera(props: ThreeElements['mesh']) {
 
 
         // camera.position.copy(position)
-        // camera.up.set(0, 1, 0)
+        camera.up.set(Math.cos(x * 0.8) , Math.sin(x * 0.8) + 3, 0)
         // camera.lookAt(position.clone().add(tangent))
+        x += 0.01
     
     })
 
