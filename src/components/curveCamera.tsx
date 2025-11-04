@@ -16,7 +16,7 @@ const geometry = new THREE.BufferGeometry().setFromPoints(points)
 const material = new THREE.LineBasicMaterial({color: 0xc96ce6})
 const curveObject = new THREE.Line(geometry, material);
 
-function CurveCamera(props: ThreeElements['mesh']) {
+function CurveCamera(props: ThreeElements['mesh']) { //props isn't needed here
     const meshRef = useRef<THREE.Mesh>(null!)
     const [hovered, setHover] = useState(false)
     const [active, setActive] = useState(false)

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import type { ThreeElements } from '@react-three/fiber'
 
@@ -47,13 +47,20 @@ function CameraBox(props: ThreeElements['mesh']) {
 
             //THIS IS OVERRIDING OUR CAMERA POSITION DECLARATION IN App.tsx
 
-            camera.position.x = 0
-            camera.position.y = 3
-            camera.position.z = 5
-            camera.lookAt(0, 0, 0)
+            // camera.position.x = 0
+            // camera.position.y = 3
+            // camera.position.z = 5
+            // camera.lookAt(0, 0, 0)
             
         }
     })
+
+    // if (!active) {
+    //         camera.position.x = 0
+    //         camera.position.y = 3
+    //         camera.position.z = 5
+    //         camera.lookAt(0, 0, 0)
+    // }
 
     return (
         <mesh

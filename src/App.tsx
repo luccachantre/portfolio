@@ -6,11 +6,12 @@ import D3Text from './components/3DText'
 import CameraBox from './components/CameraBox'
 import CurveCamera from './components/curveCamera'
 import Scene from './components/Scene'
+import HitBox from './components/HitBox'
 
 function App() {
 
   return (
-    <Canvas camera={{position: [0, 2, 5]}} >
+    <Canvas id='theCanvas' camera={{position: [0, 2, 5]}} >
       <ambientLight intensity={Math.PI / 2} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI / 2} />
       <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
@@ -23,6 +24,7 @@ function App() {
       <Scene />
       <D3Text />
       <CurveCamera />
+      <HitBox/>
     </Canvas>
   )
 }
