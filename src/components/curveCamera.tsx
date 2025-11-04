@@ -41,9 +41,12 @@ function CurveCamera(props: ThreeElements['mesh']) {
         meshRef.current.lookAt(position.clone().add(tangent))
 
 
-        // camera.position.copy(position)
-        camera.up.set(Math.cos(x * 0.8) , Math.sin(x * 0.8) + 3, 0)
-        // camera.lookAt(position.clone().add(tangent))
+        //camera.position.copy(position)
+        //camera.position.z = Math.sin(x) + 5
+        //camera.up.set(Math.cos(x * 0.8) , Math.sin(x * 0.8) + 3, 0)
+
+        //camera.lookAt(position.clone().add(tangent))
+        //camera.lookAt(position)
         x += 0.01
     
     })
@@ -55,7 +58,7 @@ function CurveCamera(props: ThreeElements['mesh']) {
             <mesh
             // {...props}
             ref={meshRef}
-            scale = {0.5}>
+            scale = {0.75}>
                 <boxGeometry args={[1,1,1]} />
                 <meshStandardMaterial color={hovered ? 'hotpink' : '#2f74c0'} />
             </mesh>
