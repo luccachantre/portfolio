@@ -10,6 +10,7 @@ function HitBox() {
     useEffect(() => {
         if (meshRef.current) {
             meshRef.current.position.copy(camera.position)
+            camera.lookAt(camera.position.x, camera.position.y, camera.position.z - 3)
         }
     }, [])
 
@@ -34,12 +35,36 @@ function HitBox() {
             camera.position.x += 0.02
             meshRef.current.position.copy(camera.position)
         }
+
+        if (arrowLeftIsDown) {
+            camera.rotation.y += 0.01
+            meshRef.current.rotation.copy(camera.rotation)
+        }
+
+        if (arrowRightIsDown) {
+            camera.rotation.y -= 0.01
+            meshRef.current.rotation.copy(camera.rotation)
+        }
+
+        if (arrowUpIsDown) {
+            camera.rotation.x += 0.01
+            meshRef.current.rotation.copy(camera.rotation)
+        }
+
+        if (arrowDownIsDown) {
+            camera.rotation.x -= 0.01
+            meshRef.current.rotation.copy(camera.rotation)
+        }
     })
 
     let wIsDown = false
     let sIsDown = false
     let aIsDown = false
     let dIsDown = false
+    let arrowLeftIsDown = false
+    let arrowRightIsDown = false
+    let arrowUpIsDown = false
+    let arrowDownIsDown = false
     
 
     window.addEventListener("keydown", (event) => {
@@ -55,6 +80,18 @@ function HitBox() {
                 break
             case 'd':
                 dIsDown = true
+                break
+            case 'ArrowLeft':
+                arrowLeftIsDown = true
+                break
+            case 'ArrowRight':
+                arrowRightIsDown = true
+                break
+            case 'ArrowUp':
+                arrowUpIsDown = true
+                break
+            case 'ArrowDown':
+                arrowDownIsDown = true
                 break
             
         }
@@ -74,7 +111,18 @@ function HitBox() {
             case 'd':
                 dIsDown = false
                 break
-
+            case 'ArrowLeft':
+                arrowLeftIsDown = false
+                break
+            case 'ArrowRight':
+                arrowRightIsDown = false
+                break
+            case 'ArrowUp':
+                arrowUpIsDown = false
+                break
+            case 'ArrowDown':
+                arrowDownIsDown = false
+                break
         }
     })
 
