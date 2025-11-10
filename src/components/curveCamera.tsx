@@ -41,12 +41,12 @@ function CurveCamera(props: ThreeElements['mesh']) { //props isn't needed here
         meshRef.current.lookAt(position.clone().add(tangent))
 
 
-        //camera.position.copy(position)
+        // camera.position.copy(position)
         //camera.position.z = Math.sin(x) + 5
         //camera.up.set(Math.cos(x * 0.8) , Math.sin(x * 0.8) + 3, 0)
 
-        //camera.lookAt(position.clone().add(tangent))
-        //camera.lookAt(position)
+        // camera.lookAt(position.clone().add(tangent))
+        // camera.lookAt(position)
         x += 0.01
     
     })

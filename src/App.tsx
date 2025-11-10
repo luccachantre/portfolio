@@ -1,4 +1,5 @@
 import { Canvas } from '@react-three/fiber'
+import { PointerLockControls } from '@react-three/drei'
 
 import Box from './components/Box'
 import TrackingBox from './components/TrackingBox'
@@ -25,6 +26,7 @@ function App() {
       <D3Text />
       <CurveCamera />
       <HitBox/>
+      <PointerLockControls/>
     </Canvas>
   )
 }

@@ -11,7 +11,7 @@ function Box(props: ThreeElements['mesh']) {
     let a = 0.01
     useFrame((state, delta) => {
         meshRef.current.rotation.x += delta
-        meshRef.current.position.x = Math.sin(a)
+        //meshRef.current.position.x = Math.sin(a)
         a += 0.01
     })
 
