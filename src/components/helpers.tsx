@@ -20,6 +20,21 @@ export const usePlayerControls = () => {
 
     const [movement, setMovement] = useState({ forward: false, backward: false, left: false, right: false, jump: false})
 
+    //the useEffect hook is for when we want code to run when something happens
+    //like when the component first loads, when a variable changes, etc
+    //we can add a dependency array which is what specifies when the code runs
+    //if we put one or more depencencies [a, b, c]
+    //then the code will run on mount(initial render), and when ANY of these variables change
+    //if we put an empty array []
+    //then the code will run only on mount/initial render
+    //if we put no array at all
+    //then the code will run every render
+    //a render is when react calls your component function to calculate what the UI should look like 
+    //so in this case the entire usePlayerControls function
+    //a render happens when a components state changes, when a component receives new props, 
+    // or when a parent component re renders
+    //and state refers to React state specifically, so any useState variables only, not regular variables
+
     useEffect(() => {
         
         
@@ -59,6 +74,20 @@ export const usePlayerControls = () => {
             if (!allowedKeys.includes(e.code as any)) return
             setMovement((m) => ({...m, [moveFieldByKey(e.code as keyof typeof keys)]: false}))
         }
+
+        document.addEventListener('keydown', handleKeyDown)
+        document.addEventListener('keyup', handleKeyUp)
+
+
+        //this return part of the useEffect function is called the cleanup function
+        //in here we are removing event listeners
+        //if we dont do this, we will keep creating more event listeners every time a key is pressed
+        //and the function will run that many more times than we want it to
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+            document.removeEventListener('keyup', handleKeyUp)
+        }
     }, [])
 
+    return movement
 }
