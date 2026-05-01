@@ -1,4 +1,4 @@
-# portfolio3
+# portfolio
 
 https://lucca-chantre-portfolio.vercel.app
 
