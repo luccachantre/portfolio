@@ -167,13 +167,15 @@ a:active {
 .music-container {
     background-color: blueviolet;
     background-image: url("/assets/images/square.png");
-    background-size: 100% auto;
-    background-position-x: -200px;
+    background-size: cover;
+    /* background-position-x: -200px; */
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    padding-bottom: 100px;
 }
 
 .music-container h2 {
@@ -183,4 +185,15 @@ a:active {
 
 .music-container p {
     /* color: blue; */
+}
+
+.music-content-container {
+    padding-top: 200px;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.music-content {
+    width: 350px;
 }
